@@ -1,18 +1,51 @@
 package com.example.intervarsity;
 
+import android.app.Activity;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
+import android.view.View;
+import android.widget.TextView;
 
 import com.example.intervarsity.R;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends Activity {
+
+    private RecyclerView recyclerView;
+    private RecyclerView.Adapter adapter;
+    private RecyclerView.LayoutManager layoutManager;
+    private String[] data = new String[2];
+    private TextView smallGroup;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        data[0] = "Small Groups";
+        data[1] = "Events";
+        recyclerView = (RecyclerView) findViewById(R.id.my_recycler_view);
+
+        recyclerView.setHasFixedSize(true);
+
+        layoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(layoutManager);
+
+        adapter = new MyAdapter(data);
+        recyclerView.setAdapter(adapter);
+        smallGroup = (TextView) findViewById(R.id.textView);
+
+        recyclerView.addOnItemTouchListener(new RecyclerItemClickListener(this, new RecyclerItemClickListener.OnItemClickListener(){
+            @Override public void onItemClick(View view, int position){
+                Log.v("Hereish", "did that" + position);
+            }
+        }));
+
     }
 
     @Override
@@ -36,4 +69,6 @@ public class MainActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+
 }

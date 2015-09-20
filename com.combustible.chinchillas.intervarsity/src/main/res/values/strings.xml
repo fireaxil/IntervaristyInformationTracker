@@ -3,4 +3,7 @@
 
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+    <string name="iv">InterVarsity Christian Fellowship at UB</string>
+    <string name="small_groups">Small Groups</string>
+    <string name="element">Element</string>
 </resources>
